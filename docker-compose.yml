@@ -1,0 +1,33 @@
+services:
+  api:
+    build: 
+      context: .
+      dockerfile: ./infra/api/Dockerfile
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./api:/var/www/html
+
+  web:
+    build: 
+      context: .
+      dockerfile: ./infra/web/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./api:/var/www/html
+
+  db:
+    build:
+      context: .
+      dockerfile: ./infra/db/Dockerfile
+    ports:
+      - 3306:3306
+    environment:
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_DATABASE=database"
+      - "MYSQL_USER=laravel"
+      - "MYSQL_PASSWORD=password"
+    volumes:
+      - ./infra/db/init:/docker-entrypoint-initdb.d
+  
