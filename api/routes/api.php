@@ -3,8 +3,9 @@
 use App\Http\Controllers\Auth\GetAuthUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PostController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,28 +20,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ログイン
-Route::post("/login", LoginController::class);
+Route::post('/login', LoginController::class);
 
-Route::group(["middleware" => "auth:sanctum"], function() {
-    Route::get("/user", GetAuthUserController::class);
-    Route::post("/logout", LogoutController::class);
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/user', GetAuthUserController::class);
+    Route::post('/logout', LogoutController::class);
 
     // posts
-    Route::get("/posts", [PostController::class, "index"]);
-    Route::post("/posts", [PostController::class, "store"]);
-    Route::get("/posts/{id}", [PostController::class, "show"]);
-    Route::patch("/posts/{id}", [PostController::class, "update"]);
-    Route::delete("/posts/{id}", [PostController::class, "destroy"]);
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts/{id}', [PostController::class, 'show']);
+    Route::patch('/posts/{id}', [PostController::class, 'update']);
+    Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 
     // roles
-    // Route::get("/roles", RoleController::class);
+    Route::get('/roles', [RoleController::class, 'index']);
     // Route::get("/roles/:rolesId", RoleDetailController::class);
     // Route::roles("/roles/", RoleCreateController::class);
     // Route::patch("/roles/:rolesId", RoleUpdateController::class);
     // Route::delete("/roles/:rolesId", RoleDeleteController::class);
 
     // permissions
-    // Route::get("/permissions", PermissionListController::class);
+    Route::get('/permissions', [PermissionController::class, 'index']);
     // Route::get("/permissions/:permissionsId", PermissionDetailController::class);
     // Route::permissions("/permissions/", PermissionCreateController::class);
     // Route::patch("/permissions/:permissionsId", PermissionUpdateController::class);

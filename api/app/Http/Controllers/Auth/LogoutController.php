@@ -17,7 +17,7 @@ class LogoutController extends Controller
         $user->currentAccessToken()->delete();
 
         return response()->json([
-            "message" => "ログアウトしました"
+            'message' => 'ログアウトしました',
         ], 200);
     }
 }

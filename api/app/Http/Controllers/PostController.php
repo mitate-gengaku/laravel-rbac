@@ -16,11 +16,11 @@ class PostController extends Controller
         $auth_id = Auth::id();
 
         $posts = Post::query()
-            ->where("user_id", '=', $auth_id)
+            ->where('user_id', '=', $auth_id)
             ->get();
 
         return response()->json([
-            "posts" => $posts
+            'posts' => $posts,
         ], 200);
     }
 
@@ -31,16 +31,16 @@ class PostController extends Controller
     {
         $auth_id = Auth::id();
 
-        $body = $request->only("title", "body");
+        $body = $request->only('title', 'body');
 
         $data = array_merge($body, [
-            "user_id" => $auth_id
+            'user_id' => $auth_id,
         ]);
 
         Post::create($data);
 
         return response()->json([
-            "message" => "投稿を作成しました"
+            'message' => '投稿を作成しました',
         ], 200);
     }
 
@@ -50,11 +50,11 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::query()
-            ->where("id", "=", $id)
+            ->where('id', '=', $id)
             ->first();
 
         return response()->json([
-            "post" => $post
+            'post' => $post,
         ], 200);
     }
 
@@ -63,16 +63,16 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $body = $request->only("title", "body");
+        $body = $request->only('title', 'body');
         $auth_id = Auth::id();
 
         Post::query()
-            ->where("id", "=", $id)
-            ->where("user_id", "=", $auth_id)
+            ->where('id', '=', $id)
+            ->where('user_id', '=', $auth_id)
             ->update($body);
 
         return response()->json([
-            "message" => "投稿を更新しました"
+            'message' => '投稿を更新しました',
         ], 200);
     }
 
@@ -84,12 +84,12 @@ class PostController extends Controller
         $auth_id = Auth::id();
 
         Post::query()
-            ->where("id", "=", $id)
-            ->where("user_id", "=", $auth_id)
+            ->where('id', '=', $id)
+            ->where('user_id', '=', $auth_id)
             ->delete();
 
         return response()->json([
-            "message" => "投稿を削除しました"
+            'message' => '投稿を削除しました',
         ], 200);
     }
 }

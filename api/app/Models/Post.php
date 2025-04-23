@@ -13,14 +13,11 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'body'
+        'body',
     ];
-
 
     /**
      * Get the user associated with the Post
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function user(): HasOne
     {

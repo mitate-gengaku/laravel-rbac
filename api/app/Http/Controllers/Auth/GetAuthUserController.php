@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class GetAuthUserController extends Controller
 {
@@ -16,7 +15,7 @@ class GetAuthUserController extends Controller
         $user = request()->user();
 
         return response()->json([
-            'user' => $user
+            'user' => $user,
         ], 200);
     }
 }
