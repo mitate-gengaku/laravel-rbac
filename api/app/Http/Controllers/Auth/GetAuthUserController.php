@@ -16,6 +16,7 @@ class GetAuthUserController extends Controller
 
         return response()->json([
             'user' => $user,
+            'role' => $user->getRoleNames(),
         ], 200);
     }
 }

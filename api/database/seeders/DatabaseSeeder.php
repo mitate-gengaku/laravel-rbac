@@ -36,20 +36,11 @@ class DatabaseSeeder extends Seeder
         $user = Role::query()->where('name', '=', 'user')->first();
 
         for ($i = 0; $i < count($permissions); $i++) {
-            if (preg_match('/role:/', $permissions[$i]->name)) {
-                $super_admin->givePermissionTo($permissions[$i]);
-            }
-
-            if (preg_match('/permission:/', $permissions[$i]->name)) {
-                $super_admin->givePermissionTo($permissions[$i]);
-            }
-
             if (preg_match('/user:/', $permissions[$i]->name)) {
-                $super_admin->givePermissionTo($permissions[$i]);
                 $manager->givePermissionTo($permissions[$i]);
             }
 
-            if (preg_match('/user:list|role:list|permission:list/', $permissions[$i]->name)) {
+            if (preg_match('/role:list|permission:list/', $permissions[$i]->name)) {
                 $manager->givePermissionTo($permissions[$i]);
             }
 
