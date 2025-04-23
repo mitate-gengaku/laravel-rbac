@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\GetAuthUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,18 +22,18 @@ use Illuminate\Support\Facades\Route;
 Route::post("/login", LoginController::class);
 
 Route::group(["middleware" => "auth:sanctum"], function() {
-    Route::get('/user', GetAuthUserController::class);
+    Route::get("/user", GetAuthUserController::class);
     Route::post("/logout", LogoutController::class);
 
     // posts
-    // Route::get("/posts", PostListController::class);
-    // Route::get("/posts/:postId", PostDetailController::class);
-    // Route::post("/posts/", PostCreateController::class);
-    // Route::patch("/posts/:postId", PostUpdateController::class);
-    // Route::delete("/posts/:postId", PostDeleteController::class);
+    Route::get("/posts", [PostController::class, "index"]);
+    Route::post("/posts", [PostController::class, "store"]);
+    Route::get("/posts/{id}", [PostController::class, "show"]);
+    Route::patch("/posts/{id}", [PostController::class, "update"]);
+    Route::delete("/posts/{id}", [PostController::class, "destroy"]);
 
     // roles
-    // Route::get("/roles", RoleListController::class);
+    // Route::get("/roles", RoleController::class);
     // Route::get("/roles/:rolesId", RoleDetailController::class);
     // Route::roles("/roles/", RoleCreateController::class);
     // Route::patch("/roles/:rolesId", RoleUpdateController::class);
